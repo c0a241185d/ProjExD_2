@@ -30,7 +30,7 @@ def check_bound(rct: pg.Rect) -> tuple[bool, bool]:
         tate = False
     return yoko, tate
 
-def gameover(screen: pg.Surface) -> None:
+def gameover(screen: pg.Surface) -> None: # ゲームオーバーを表示する関数
         gm_img = pg.Surface((WIDTH,HEIGHT))
         pg.draw.rect(gm_img, (0, 0, 0), pg.Rect (0, 0, 1100, 650))
         gm_rct = gm_img.get_rect()
