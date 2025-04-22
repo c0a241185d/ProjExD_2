@@ -52,6 +52,7 @@ def main():
     # こうかとん初期化
     bg_img = pg.image.load("fig/pg_bg.jpg")    
     kk_img = pg.transform.rotozoom(pg.image.load("fig/3.png"), 0, 0.9)
+    kk2_img = pg.transform.flip(kk_img, True, False)
     kk_rct = kk_img.get_rect()
     kk_rct.center = 300, 200
     # 爆弾初期化
@@ -63,6 +64,19 @@ def main():
     bb_img.set_colorkey((0, 0, 0))
     vx, vy = +5, +5
 
+    def get_kk_img(sum_mv: tuple[int, int]) -> pg.Surface:
+        en3 = {
+            (-5,0) : pg.transform.rotozoom(kk_img, 0, 1.0),
+            (-5,-5) : pg.transform.rotozoom(kk_img, 45, 1.0),
+            (0,-5) : pg.transform.rotozoom(kk2_img, 90, 1.0),
+            (5,-5) : pg.transform.rotozoom(kk2_img, 45, 1.0),
+            (5,0) : pg.transform.rotozoom(kk2_img, 0, 1.0),
+            (5,5) : pg.transform.rotozoom(kk2_img, -45, 1.0),
+            (0,5) : pg.transform.rotozoom(kk2_img, -90, 1.0),
+            (-5,5) : pg.transform.rotozoom(kk2_img, -45, 1.0),
+        }
+        return en3.get(sum_mv, en3[0,0]) 
+       
     clock = pg.time.Clock()
     tmr = 0
     while True:
@@ -91,6 +105,7 @@ def main():
         #     sum_mv[0] -= 5
         # if key_lst[pg.K_RIGHT]:
         #     sum_mv[0] += 5
+        kk_img = get_kk_img(tuple(sum_mv))
         kk_rct.move_ip(sum_mv)
         if check_bound(kk_rct) != (True, True): # 画面外だったら
             kk_rct.move_ip(-sum_mv[0], -sum_mv[1]) # 画面内に戻す
