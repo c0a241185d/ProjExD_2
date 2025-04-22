@@ -2,8 +2,13 @@ import os
 import sys
 import pygame as pg
 
-
 WIDTH, HEIGHT = 1100, 650
+DELTA = {  
+            pg.K_UP: (0,-5),
+            pg.K_DOWN: (0,5),
+            pg.K_LEFT: (-5,0),
+            pg.K_RIGHT: (5,0),
+        }  #DELTAの定義
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -24,18 +29,11 @@ def main():
 
         key_lst = pg.key.get_pressed()
         sum_mv = [0, 0]
-        
-        DELTA = {
-            pg.K_UP: (0,-5),
-            pg.K_DOWN: (0,5),
-            pg.K_LEFT: (-5,0),
-            pg.K_RIGHT: (5,0)
-        }
 
-        for key, (x,y) in DELTA.items():
+        for key, mv in DELTA.items():  #デルタを使ったif文
             if key_lst[key]:
-                sum_mv[0] += x
-                sum_mv[1] += y
+                sum_mv[0] += mv[0]  #左右方向
+                sum_mv[1] += mv[1]  #上下方向
 
         kk_rct.move_ip(sum_mv)
         screen.blit(kk_img, kk_rct)
