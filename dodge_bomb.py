@@ -51,7 +51,7 @@ def main():
     screen = pg.display.set_mode((WIDTH, HEIGHT))
     # こうかとん初期化
     bg_img = pg.image.load("fig/pg_bg.jpg")    
-    kk_img = pg.transform.rotozoom(pg.image.load("fig/3.png"), 0, 0.9)
+    kk_img = pg.transform.rotozoom(pg.image.load("fig/3.png"), 0, 0.9) # kk=こうかとん
     kk2_img = pg.transform.flip(kk_img, True, False)
     kk_rct = kk_img.get_rect()
     kk_rct.center = 300, 200
